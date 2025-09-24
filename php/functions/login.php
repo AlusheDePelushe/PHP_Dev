@@ -19,10 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Verificar contraseña
         if (password_verify($password, $usuario['password'])) {
+        
             // Inicio de sesión exitoso
-            echo "<h2>¡Bienvenido, " . htmlspecialchars($usuario['username']) . "!</h2>";
+            session_start();
+            $_SESSION['username'] = $usuario['username'];
+        
             // Aquí podrías redirigir a un dashboard:
-            // header("Location: dashboard.php");
+            header("Location: ../dashboard.php");
+        
             exit();
         } else {
             // Contraseña incorrecta
